@@ -12,5 +12,15 @@ function addBookToLibrary(book){
 }
 
 function displayLibrary(){
-
+  let tableBody = document.querySelector("tbody");
+  for(book of myLibrary){
+    let bookRow = document.createElement("tr");
+    for(property in book){
+      let bookInfo  = document.createElement("td");
+      bookInfo.textContent = book[property]
+      bookRow.appendChild(bookInfo);
+      // console.log(property + ": " + book[property]);
+    }
+    tableBody.appendChild(bookRow);
+  }
 }
