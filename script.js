@@ -8,6 +8,7 @@ function Book(title, author, pages, isAvailable){
 }
 
 function addBookToLibrary(book){
+  myLibrary.push(book);
 }
 
 function displayLibrary(){
