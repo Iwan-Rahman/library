@@ -41,6 +41,20 @@ function displayLibrary(){
   }
 }
 
+//Button Event Listeners
+let btnAdd = document.querySelector("button");
+let btnDelete = document.querySelector("tfoot td:nth-child(2) > button");
+let btnDeleteAll = document.querySelector("tfoot td:nth-child(2) > button:nth-child(2)");
+let btnReadAll = document.querySelector("tfoot td:nth-child(3) > button");
+let btnUnreadAll = document.querySelector("tfoot td:nth-child(3) > button:nth-child(2)");
+
+let formAddBook = document.querySelector(".form-container");
+let btnFormAdd = document.querySelector("form button[type='submit']");
+let btnFormCancel = document.querySelector("form button[type='button']");
+
+btnAdd.addEventListener("click", () => formAddBook.style.display = "flex");
+btnFormCancel.addEventListener("click", () => formAddBook.style.display = "none");
+
 let x = new Book("Grumpy Cat","CatLover216x",30,false);
 let y = new Book("Macbeth","Shakespeare",150,true);
 let z = new Book("1984","George Orwell",300,false);
