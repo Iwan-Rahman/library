@@ -1,10 +1,10 @@
 let myLibrary = [];
 
-function Book(title, author, pages, isAvailable){
+function Book(title, author, pages, isRead){
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = isAvailable;
+  this.status = isRead;
 }
 
 function addBookToLibrary(book){
@@ -24,3 +24,11 @@ function displayLibrary(){
     tableBody.appendChild(bookRow);
   }
 }
+
+let x = new Book("Grumpy Cat","CatLover216x",30,true);
+let y = new Book("Macbeth","Shakespeare",150,true);
+let z = new Book("1984","George Orwell",300,true);
+addBookToLibrary(x)
+addBookToLibrary(y)
+addBookToLibrary(z)
+displayLibrary();
