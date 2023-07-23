@@ -99,3 +99,9 @@ form > div:last-child > button {
   color: white;
   font-weight: 900;
 }
+
+ tbody > .delete:hover {
+  background-color: rgba(247, 37, 37, 0.3);
+  color: maroon;
+  text-decoration: line-through;
+}

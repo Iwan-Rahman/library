@@ -1,4 +1,5 @@
 let myLibrary = [];
+let myLibraryByTitle = [];
 
 function Book(title, author, pages, isRead){
   this.title = title;
@@ -9,6 +10,7 @@ function Book(title, author, pages, isRead){
 
 function addBookToLibrary(book){
   myLibrary.push(book);
+  myLibraryByTitle.push(book.title);
 }
 
 function displayLibrary(){
@@ -64,6 +66,41 @@ btnFormAdd.addEventListener("click", () => {
   displayLibrary();
   document.querySelector("form").reset();
 })
+
+let bookRows;
+
+btnDelete.addEventListener("click", deleteMode)
+btnDeleteAll.addEventListener("click",() => {
+  myLibrary = [];
+  myLibraryByTitle = [];
+  document.querySelector("tbody").replaceChildren();
+  displayLibrary();
+})
+
+function deleteMode(){
+  bookRows = document.querySelectorAll("tbody > tr");
+  if(bookRows[0].classList.contains("delete")){
+    for(bookRow of bookRows){
+      bookRow.classList.remove("delete");
+    }
+  }else{
+    for(bookRow of bookRows){
+      bookRow.addEventListener("click",(e) => {
+        if(bookRows.length == 0 || bookRow.classList.contains("delete")){
+          let bookIndex = myLibraryByTitle.indexOf(bookRow.querySelector("td").textContent);
+          myLibrary.splice(bookIndex,1);
+          myLibraryByTitle.splice(bookIndex,1);
+          document.querySelector("tbody").replaceChildren();
+          displayLibrary();
+          deleteMode();
+        }
+      })
+      bookRow.classList.add("delete");
+    }
+  }
+}
+
+
 
 let x = new Book("Grumpy Cat","CatLover216x",30,false);
 let y = new Book("Macbeth","Shakespeare",150,true);
