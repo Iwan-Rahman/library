@@ -49,11 +49,21 @@ let btnReadAll = document.querySelector("tfoot td:nth-child(3) > button");
 let btnUnreadAll = document.querySelector("tfoot td:nth-child(3) > button:nth-child(2)");
 
 let formAddBook = document.querySelector(".form-container");
-let btnFormAdd = document.querySelector("form button[type='submit']");
-let btnFormCancel = document.querySelector("form button[type='button']");
+let btnFormAdd = document.querySelector("form button[type='button']");
+let btnFormCancel = document.querySelector("form button[type='button']:last-child");
+
+let inpTitle = document.querySelector("#bookTitle");
+let inpAuthor = document.querySelector("#bookAuthor");
+let inpPages = document.querySelector("#bookPages");
 
 btnAdd.addEventListener("click", () => formAddBook.style.display = "flex");
 btnFormCancel.addEventListener("click", () => formAddBook.style.display = "none");
+btnFormAdd.addEventListener("click", () => {
+  addBookToLibrary(new Book(inpTitle.value, inpAuthor.value, inpPages.value,false));
+  document.querySelector("tbody").replaceChildren();
+  displayLibrary();
+  document.querySelector("form").reset();
+})
 
 let x = new Book("Grumpy Cat","CatLover216x",30,false);
 let y = new Book("Macbeth","Shakespeare",150,true);
