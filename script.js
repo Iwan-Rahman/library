@@ -5,7 +5,7 @@ function Book(title, author, pages, isRead){
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = isRead;
+  this.isRead = isRead;
 }
 
 function addBookToLibrary(book){
@@ -20,7 +20,7 @@ function displayLibrary(){
     for(property in book){
       let bookInfo  = document.createElement("td");
 
-      if(property == "status"){
+      if(property == "isRead"){
         let img = document.createElement("img");
 
         if(book[property]){
@@ -43,6 +43,38 @@ function displayLibrary(){
   }
 }
 
+function deleteMode(){
+  bookRows = document.querySelectorAll("tbody > tr");
+  if(bookRows[0].classList.contains("delete")){
+    for(bookRow of bookRows){
+      bookRow.classList.remove("delete");
+    }
+  }else{
+    for(bookRow of bookRows){
+      bookRow.addEventListener("click",(e) => {
+        if(bookRows.length == 0 || e.currentTarget.classList.contains("delete")){
+          let bookIndex = myLibraryByTitle.indexOf(e.currentTarget.querySelector("td").textContent);
+          myLibrary.splice(bookIndex,1);
+          myLibraryByTitle.splice(bookIndex,1);
+          document.querySelector("tbody").replaceChildren();
+          displayLibrary();
+          deleteMode();
+        }
+      })
+      bookRow.classList.add("delete");
+    }
+  }
+}
+
+// function updateAllBookStatus(isRead){
+//   for(book of myLibrary){
+//     book.isRead = isRead;
+//   }
+//   document.querySelector("tbody").replaceChildren();
+//   displayLibrary();
+// }
+
+
 //Button Event Listeners
 let btnAdd = document.querySelector("button");
 let btnDelete = document.querySelector("tfoot td:nth-child(2) > button");
@@ -60,6 +92,7 @@ let inpPages = document.querySelector("#bookPages");
 
 btnAdd.addEventListener("click", () => formAddBook.style.display = "flex");
 btnFormCancel.addEventListener("click", () => formAddBook.style.display = "none");
+
 btnFormAdd.addEventListener("click", () => {
   addBookToLibrary(new Book(inpTitle.value, inpAuthor.value, inpPages.value,false));
   document.querySelector("tbody").replaceChildren();
@@ -77,30 +110,12 @@ btnDeleteAll.addEventListener("click",() => {
   displayLibrary();
 })
 
-function deleteMode(){
-  bookRows = document.querySelectorAll("tbody > tr");
-  if(bookRows[0].classList.contains("delete")){
-    for(bookRow of bookRows){
-      bookRow.classList.remove("delete");
-    }
-  }else{
-    for(bookRow of bookRows){
-      bookRow.addEventListener("click",(e) => {
-        if(bookRows.length == 0 || bookRow.classList.contains("delete")){
-          let bookIndex = myLibraryByTitle.indexOf(bookRow.querySelector("td").textContent);
-          myLibrary.splice(bookIndex,1);
-          myLibraryByTitle.splice(bookIndex,1);
-          document.querySelector("tbody").replaceChildren();
-          displayLibrary();
-          deleteMode();
-        }
-      })
-      bookRow.classList.add("delete");
-    }
-  }
-}
+// btnReadAll.addEventListener("click", () => updateAllBookStatus(true));
+// btnUnreadAll.addEventListener("click", () => updateAllBookStatus(false));
 
-
+// for(book of bookRows){
+//   book.
+// }
 
 let x = new Book("Grumpy Cat","CatLover216x",30,false);
 let y = new Book("Macbeth","Shakespeare",150,true);
