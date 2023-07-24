@@ -20,6 +20,7 @@ th {
   background-color: #0f4c96;
   color: white;
   padding: 0.5rem 0rem;
+  font-size: 1.2rem;
 }
 
 tr {
@@ -51,7 +52,7 @@ img {
 tfoot td {
   background-color: #0f4c96;
   text-align: center;
-  padding: 0.2rem 0rem;
+  padding: 0.4rem 0rem;
 }
 
 .form-container {
@@ -104,4 +105,21 @@ form > div:last-child > button {
   background-color: rgba(247, 37, 37, 0.3);
   color: maroon;
   text-decoration: line-through;
+}
+
+tfoot button {
+  background-color: white;
+  color:#0f4c96;
+  font-weight: 800;
+  border: none;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+  appearance: none;
+  width: clamp(max-content,33%,8rem);
+}
+
+
+tfoot button {
+  margin-left: 5%;
+  margin-right: 5%;
 }

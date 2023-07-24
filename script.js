@@ -98,7 +98,7 @@ let btnAdd = document.querySelector("button");
 let btnDelete = document.querySelector("tfoot td:nth-child(2) > button");
 let btnDeleteAll = document.querySelector("tfoot td:nth-child(2) > button:nth-child(2)");
 let btnReadAll = document.querySelector("tfoot td:nth-child(3) > button");
-let btnUnreadAll = document.querySelector("tfoot td:nth-child(3) > button:nth-child(2)");
+let btnUnreadAll = document.querySelector("tfoot td:last-child > button");
 
 let formAddBook = document.querySelector(".form-container");
 let btnFormAdd = document.querySelector("form button[type='button']");
