@@ -41,6 +41,8 @@ function displayLibrary(){
     }
     tableBody.appendChild(bookRow);
   }
+
+  allowStatusUpdate();
 }
 
 function deleteMode(){
@@ -66,13 +68,29 @@ function deleteMode(){
   }
 }
 
-// function updateAllBookStatus(isRead){
-//   for(book of myLibrary){
-//     book.isRead = isRead;
-//   }
-//   document.querySelector("tbody").replaceChildren();
-//   displayLibrary();
-// }
+function allowStatusUpdate(){
+  bookRows = document.querySelectorAll("tbody > tr");
+  for(bookRow of bookRows){
+    bookRow.querySelector("img").addEventListener("click",(e) => {
+      let bookIndex = myLibraryByTitle.indexOf((e.target.parentElement.parentElement).querySelector("td").textContent);
+      myLibrary[bookIndex].isRead = !(myLibrary[bookIndex].isRead);
+  
+      if(myLibrary[bookIndex].isRead){
+        e.target.setAttribute("src","./img/book-read.svg");
+      }else{
+        e.target.setAttribute("src","./img/book-unread.svg");
+      }
+    })
+  }
+}
+
+function updateAllBookStatus(isRead){
+  for(book of myLibrary){
+    book.isRead = isRead;
+  }
+  document.querySelector("tbody").replaceChildren();
+  displayLibrary();
+}
 
 
 //Button Event Listeners
@@ -100,7 +118,7 @@ btnFormAdd.addEventListener("click", () => {
   document.querySelector("form").reset();
 })
 
-let bookRows;
+let bookRows = [];
 
 btnDelete.addEventListener("click", deleteMode)
 btnDeleteAll.addEventListener("click",() => {
@@ -110,12 +128,9 @@ btnDeleteAll.addEventListener("click",() => {
   displayLibrary();
 })
 
-// btnReadAll.addEventListener("click", () => updateAllBookStatus(true));
-// btnUnreadAll.addEventListener("click", () => updateAllBookStatus(false));
+btnReadAll.addEventListener("click", () => updateAllBookStatus(true));
+btnUnreadAll.addEventListener("click", () => updateAllBookStatus(false));
 
-// for(book of bookRows){
-//   book.
-// }
 
 let x = new Book("Grumpy Cat","CatLover216x",30,false);
 let y = new Book("Macbeth","Shakespeare",150,true);
