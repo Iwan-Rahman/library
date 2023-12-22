@@ -82,7 +82,7 @@ form > div:last-child {
   justify-content: center;
 }
 
-form > div:last-child > button {
+form > div:last-child > input[type='submit'],form > div:last-child > input[type='button'] {
   width: 50%;
   padding: 0.2rem;
   border-radius: 0.5rem;

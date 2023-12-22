@@ -48,11 +48,11 @@ function displayLibrary(){
 function deleteMode(){
   bookRows = document.querySelectorAll("tbody > tr");
   if(bookRows[0].classList.contains("delete")){
-    for(bookRow of bookRows){
+    for(let bookRow of bookRows){
       bookRow.classList.remove("delete");
     }
   }else{
-    for(bookRow of bookRows){
+    for(let bookRow of bookRows){
       bookRow.addEventListener("click",(e) => {
         if(bookRows.length == 0 || e.currentTarget.classList.contains("delete")){
           let bookIndex = myLibraryByTitle.indexOf(e.currentTarget.querySelector("td").textContent);
@@ -100,22 +100,25 @@ let btnDeleteAll = document.querySelector("tfoot td:nth-child(2) > button:nth-ch
 let btnReadAll = document.querySelector("tfoot td:nth-child(3) > button");
 let btnUnreadAll = document.querySelector("tfoot td:last-child > button");
 
-let formAddBook = document.querySelector(".form-container");
-let btnFormAdd = document.querySelector("form button[type='button']");
-let btnFormCancel = document.querySelector("form button[type='button']:last-child");
+let formAddBook = document.querySelector("form");
+let formAddBookContainer = document.querySelector(".form-container");
+let btnFormCancel = document.querySelector("form input[type='button']");
 
 let inpTitle = document.querySelector("#bookTitle");
 let inpAuthor = document.querySelector("#bookAuthor");
 let inpPages = document.querySelector("#bookPages");
 
-btnAdd.addEventListener("click", () => formAddBook.style.display = "flex");
-btnFormCancel.addEventListener("click", () => formAddBook.style.display = "none");
+btnAdd.addEventListener("click", () => formAddBookContainer.style.display = "flex");
+btnFormCancel.addEventListener("click", () => formAddBookContainer.style.display = "none");
 
-btnFormAdd.addEventListener("click", () => {
-  addBookToLibrary(new Book(inpTitle.value, inpAuthor.value, inpPages.value,false));
-  document.querySelector("tbody").replaceChildren();
-  displayLibrary();
-  document.querySelector("form").reset();
+formAddBook.addEventListener("submit", (event) => {
+  if(formAddBook.checkValidity()){
+    addBookToLibrary(new Book(inpTitle.value, inpAuthor.value, inpPages.value,false));
+    document.querySelector("tbody").replaceChildren();
+    displayLibrary();
+    document.querySelector("form").reset();
+  }
+  event.preventDefault();
 })
 
 let bookRows = [];
